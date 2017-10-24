@@ -1,0 +1,11 @@
+.center > button {
+  margin-left: 23px;
+}
+
+.together {
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}
