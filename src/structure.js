@@ -25,19 +25,21 @@ export class Structure extends React.Component {
       }
     }
   }
-  
+
 
   handleClickOperator = (o) => {
     return (evt) => {
       evt.preventDefault();
-      if (this.state.result === null) {
-        this.setState((operator) => {
-          return {operator: o};
-        });
-      } else {
-        this.setState({operator: o}, function () {
-          this.handleClickEquals()
-        });
+      if (this.state.first !== "") {
+        if (this.state.result === null) {
+          this.setState((operator) => {
+            return {operator: o};
+          });
+        } else {
+          this.setState({operator: o}, function () {
+            this.handleClickEquals()
+          });
+        }
       }
     }
   }
@@ -46,16 +48,16 @@ export class Structure extends React.Component {
     let result = '';
     switch(operator) {
       case '+':
-        result = parseInt(first, 10) + parseInt(second, 10);
+        result = parseFloat(first, 10) + parseFloat(second, 10);
         break;
       case '-':
-        result = parseInt(first, 10) - parseInt(second, 10);
+        result = parseFloat(first, 10) - parseFloat(second, 10);
         break;
       case '/':
-        result = parseInt(first, 10) / parseInt(second, 10);
+        result = parseFloat(first, 10) / parseFloat(second, 10);
         break;
       case '*':
-        result = parseInt(first, 10) * parseInt(second, 10);
+        result = parseFloat(first, 10) * parseFloat(second, 10);
         break;
       default:
         result= '';
@@ -67,8 +69,11 @@ export class Structure extends React.Component {
   handleClickEquals = () => {
     const { operator, first, second } = this.state;
     const resultFinal = this.handleCalculation(first, second, operator);
-      this.setState((result) => {
-        return {result: resultFinal};
+      this.setState({
+        first: resultFinal ,
+        operator: null,
+        second: "",
+        result: null
       });
   }
 
@@ -102,7 +107,8 @@ export class Structure extends React.Component {
     return (
       <div>
         <h1>Calculette Fonctionnelle React JS</h1>
-        <button onClick={this.handleClickReset}className="">AC</button><br/><br/>
+        <button onClick={this.handleClickReset}className="">AC</button><button onClick={this.handleClickNumber(".")}className="">.</button><br/><br/>
+<br/><br/>
         <div className='chiffres'>
           {numbers}
         </div>
@@ -121,7 +127,7 @@ export class Structure extends React.Component {
             <div className='choix2'>{this.state.second}</div>
           </div>
           <button className="calcul" onClick={this.handleClickEquals}>=</button>
-          <div className='resultat'>{this.state.result}</div>
+          {/* <div className='resultat'>{this.state.result}</div>*/}
         </div>
       </div>
     );
