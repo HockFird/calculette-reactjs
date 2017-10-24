@@ -1,4 +1,5 @@
 import React from 'react';
+import { Segment, Label, Icon, Container, Divider, Button } from 'semantic-ui-react'
 
 export class Structure extends React.Component {
 
@@ -93,43 +94,49 @@ export class Structure extends React.Component {
           key={i}
           className={(i === 0) ? 'center default-btn': 'default-btn'}
         >
-          <button
+          <Button
+            basic color="blue"
             value={i}
             onClick={this.handleClickNumber(i)}
             disabled={this.state.result}
           >{i}
-          </button>
+          </Button>
           {(i % 3) === 0 ? <br/> : null}
         </span>
       );
     });
 
     return (
-      <div>
+      <Container text textAlign='center'>
+      <br />
+      <Icon name="calculator" size="huge" color="blue"/>
+      <Segment color="blue" size="large">
         <h1>Calculette Fonctionnelle React JS</h1>
-        <button onClick={this.handleClickReset}className="">AC</button><button onClick={this.handleClickNumber(".")}className="">.</button><br/><br/>
-<br/><br/>
+        <Divider />
+        <Button onClick={this.handleClickReset}className="">AC</Button><Button onClick={this.handleClickNumber(".")}className="">.</Button><br/><br/>
         <div className='chiffres'>
           {numbers}
         </div>
-        <br/>
-        <div className='operateurs'>
-          <button value='+' onClick={this.handleClickOperator('+')}>+</button>
-          <button value='-' onClick={this.handleClickOperator('-')}>-</button>
-          <button value='/' onClick={this.handleClickOperator('/')}>/</button>
-          <button value='*' onClick={this.handleClickOperator('*')}>*</button>
-        </div>
         <br />
+        <div className='operateurs'>
+          <Button value='+' onClick={this.handleClickOperator('+')}>+</Button>
+          <Button value='-' onClick={this.handleClickOperator('-')}>-</Button>
+          <Button value='/' onClick={this.handleClickOperator('/')}>/</Button>
+          <Button value='*' onClick={this.handleClickOperator('*')}>*</Button>
+        </div>
+        <Divider />
         <div className="egalite">
-          <div className="together">
-            <div className='choix1'>{this.state.first}</div>
-            <div className='choixOpe'>{this.state.operator}</div>
-            <div className='choix2'>{this.state.second}</div>
-          </div>
-          <button className="calcul" onClick={this.handleClickEquals}>=</button>
+          <Container className="together" textAlign="center">
+            <Label basic color="blue" className='choix1'>{this.state.first}</Label>
+            <Label basic color="blue" className='choixOpe'>{this.state.operator}</Label>
+            <Label basic color="blue" className='choix2'>{this.state.second}</Label>
+          </Container>
+          <Divider />
+          <Button className="calcul" onClick={this.handleClickEquals}>=</Button>
           {/* <div className='resultat'>{this.state.result}</div>*/}
         </div>
-      </div>
+        </Segment>
+        </Container>
     );
   }
 }

@@ -1,9 +1,13 @@
-.center > button {
+.center > Button {
   margin-left: 23px;
 }
 
 .together {
   display: flex;
+}
+
+.button {
+  margin-bottom: 5px !important;
 }
 
 .hidden {
