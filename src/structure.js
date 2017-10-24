@@ -9,7 +9,8 @@ export class Structure extends React.Component {
       first: "",
       operator: null,
       second: "",
-      result: null
+      result: null,
+      status: "AC"
     };
     this.handleClickReset = this.handleClickReset.bind(this);
   }
@@ -17,12 +18,20 @@ export class Structure extends React.Component {
   handleClickNumber = (input) => {
     return (evt) => {
       const { operator, first, second } = this.state;
+      evt.preventDefault();
       if (operator === null) {
-        evt.preventDefault();
-        this.setState({first: first + String(input)});
+        this.setState({status: "C"});
+        if (first.indexOf(".") === -1) {
+          this.setState({first: first + String(input)});
+        } else if (input !== ".") {
+          this.setState({first: first + String(input)});
+        }
       } else {
-        evt.preventDefault();
-        this.setState({second: second + String(input)});
+        if (second.indexOf(".") === -1) {
+          this.setState({second: second + String(input)});
+        } else if (input !== ".") {
+          this.setState({second: second + String(input)});
+        }
       }
     }
   }
@@ -41,6 +50,8 @@ export class Structure extends React.Component {
             this.handleClickEquals()
           });
         }
+      } else if (o === "-" || o === "+") {
+        this.setState({first: this.state.first + String(o)});
       }
     }
   }
@@ -83,13 +94,14 @@ export class Structure extends React.Component {
       first: "",
       operator: null,
       second: "",
-      result: null
+      result: null,
+      status: "AC"
     });
   }
 
 
   render() {
-    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(i => {
+    const numbers = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0].map(i => {
       return (<span
           key={i}
           className={(i === 0) ? 'center default-btn': 'default-btn'}
@@ -113,7 +125,7 @@ export class Structure extends React.Component {
       <Segment color="blue" size="large">
         <h1>Calculette Fonctionnelle React JS</h1>
         <Divider />
-        <Button onClick={this.handleClickReset}className="">AC</Button><Button onClick={this.handleClickNumber(".")}className="">.</Button><br/><br/>
+        <Button onClick={this.handleClickReset}className="">{this.state.status}</Button><Button onClick={this.handleClickNumber(".")}className="">.</Button><br/><br/>
         <div className='chiffres'>
           {numbers}
         </div>
