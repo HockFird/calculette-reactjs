@@ -139,9 +139,11 @@ export class Structure extends React.Component {
         <Divider />
         <div className="egalite">
           <Container className="together" textAlign="center">
-            <Label basic color="blue" className='choix1'>{this.state.first}</Label>
-            <Label basic color="blue" className='choixOpe'>{this.state.operator}</Label>
-            <Label basic color="blue" className='choix2'>{this.state.second}</Label>
+            <Label basic color="blue">
+              <Label color="white" className='choix1'>{this.state.first}</Label>
+              <Label className='choixOpe'>{this.state.operator}</Label>
+              <Label className='choix2'>{this.state.second}</Label>
+            </Label>
           </Container>
           <Divider />
           <Button className="calcul" onClick={this.handleClickEquals}>=</Button>
