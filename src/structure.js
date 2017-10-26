@@ -121,7 +121,7 @@ export class Structure extends React.Component {
     return (
       <Container text textAlign='center'>
       <br />
-      <Icon name="calculator" size="huge" color="blue"/>
+      <Icon name="calculator" size="huge" color="red"/>
       <Segment color="blue" size="large">
         <h1>Calculette Fonctionnelle React JS</h1>
         <Divider />
